@@ -29,19 +29,7 @@ export class EmailsService {
     if (!editedEmail) {
       throw new BadRequestException('Invalid Request');
     }
-    if (editEmail.to) {
-      editedEmail.to = editedEmail.to;
-    }
-    if (editEmail.from) {
-      editedEmail.from = editedEmail.from;
-    }
-    if (editEmail.subject) {
-      editedEmail.subject = editedEmail.subject;
-    }
-    if (editEmail.body) {
-      editedEmail.body = editedEmail.body;
-    }
-    return editedEmail.save();
+    return this.emailsModel.updateOne({ _id: id }, { $set: editEmail });
   }
 
   async delete(_id: string): Promise<any> {
